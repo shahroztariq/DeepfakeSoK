@@ -301,7 +301,7 @@ def test_folders(args):
         "Dataset":[], "Acc": [], "Acc_best": [], "AUC": []
     })
     for data_name in ("DeepFaceLab", "Dfaker", "Faceswap", "FOM_Animation", "FOM_Faceswap", "FSGAN", "LightWeight"):
-        args.folder = ["/media/data2/binh/CSIRO/generated_data_single/real/",
+        args.folder = ["../datasets/Stabilized",
                     f"/media/data2/binh/CSIRO/generated_data_single/{data_name}/"]
         ACC, ACC_best, AUC = main(args)
         out_results = out_results.append({"Dataset":data_name, 

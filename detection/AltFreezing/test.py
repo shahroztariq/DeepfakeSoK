@@ -335,7 +335,7 @@ def test_real_folders(args):
         print("Save penultimate features")
         penul_data = dict()
 
-    args.folder = ["/media/data2/binh/CSIRO/generated_data_single/real/"]
+    args.folder = ["../datasets/Stabilized"]
     if not args.penul_ft:
         _, _, _ = main(args)
     else:
@@ -366,7 +366,7 @@ def test_folders(args):
         print("Save penultimate features")
         penul_data = dict()
     for data_name in ("DeepFaceLab", "Dfaker", "Faceswap", "FOM_Animation", "FOM_Faceswap", "FSGAN", "LightWeight"):
-        args.folder = ["/media/data2/binh/CSIRO/generated_data_single/real/",
+        args.folder = ["../datasets/Stabilized",
                     f"/media/data2/binh/CSIRO/generated_data_single/{data_name}/"]
         if not args.penul_ft:
             ACC, ACC_best, AUC = main(args)
