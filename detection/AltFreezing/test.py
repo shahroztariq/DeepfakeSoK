@@ -367,7 +367,7 @@ def test_folders(args):
         penul_data = dict()
     for data_name in ("DeepFaceLab", "Dfaker", "Faceswap", "FOM_Animation", "FOM_Faceswap", "FSGAN", "LightWeight"):
         args.folder = ["../datasets/Stabilized",
-                    f"/media/data2/binh/CSIRO/generated_data_single/{data_name}/"]
+                    f"../datasets/Stabilized/{data_name}/"]
         if not args.penul_ft:
             ACC, ACC_best, AUC = main(args)
         else:

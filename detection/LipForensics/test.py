@@ -302,7 +302,7 @@ def test_folders(args):
     })
     for data_name in ("DeepFaceLab", "Dfaker", "Faceswap", "FOM_Animation", "FOM_Faceswap", "FSGAN", "LightWeight"):
         args.folder = ["../datasets/Stabilized",
-                    f"/media/data2/binh/CSIRO/generated_data_single/{data_name}/"]
+                    f"../datasets/Stabilized/{data_name}/"]
         ACC, ACC_best, AUC = main(args)
         out_results = out_results.append({"Dataset":data_name, 
                                             "Acc": np.round(ACC,2), 
@@ -315,30 +315,6 @@ def test_folders(args):
                                         ignore_index=True)
     out_results.to_csv("../predictions/lipforensics.csv", index=False)
     
-def itw_test_folders(args):
-    """
-    Test in the wild dataset
-    - Dataset : ITW
-    - ACC
-    - ACC @best
-    - AUC
-    """
-    print("TEST UPON SETTING")
-    out_results = pd.DataFrame({
-        "Dataset":[], "Acc": [], "Acc_best": [], "AUC": []
-    })
-
-    args.folder = ["/media/data2/binh/CSIRO/collected_data_sok_single/real/",
-                f"/media/data2/binh/CSIRO/collected_data_sok_single/fake/"]
- 
-    ACC, ACC_best, AUC = main(args)
-    out_results = out_results.append({"Dataset":"itw", 
-                                        "Acc": np.round(ACC,2), 
-                                        "Acc_best": np.round(ACC_best,2), 
-                                        "AUC": np.round(AUC,2)}, ignore_index=True)
-
-    out_results.to_csv(f"../predictions/lipforensics(in the wild).csv", index=False)
-
 if __name__ == "__main__":
     args = parse_args()
     if args.data_type =='created': 

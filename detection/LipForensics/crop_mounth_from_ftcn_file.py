@@ -118,7 +118,7 @@ def test_folders(args):
     print("Copping face each video of each method")
     all_datasets = ["real","DeepFaceLab", "Dfaker", "Faceswap", "FOM_Animation", "FOM_Faceswap", "FSGAN", "LightWeight"]
     for idx, data_name in enumerate(all_datasets):
-        args.folder = f"/media/data2/binh/CSIRO/generated_data_single/{data_name}/"
+        args.folder = f"../datasets/Stabilized/{data_name}/"
         main(args)
         
 if __name__ == "__main__":

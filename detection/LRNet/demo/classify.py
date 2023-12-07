@@ -266,30 +266,7 @@ def test_folders(args):
                                         "AUC": f"{out_results.AUC.mean():.2f} ({out_results.AUC.std():.2f})"}, 
                                         ignore_index=True)
         out_results.to_csv(f"../../predictions/lrnet.csv", index=False)
-def itw_test_folders (args):
-    out_results = pd.DataFrame({
-        "Dataset":[], "Acc": [], "Acc_best": [], "AUC": []
-         })
-    real_lm_path =   f"/media/data2/binh/CSIRO/collected_data_sok_single/real/"
-    args.landmark_path = real_lm_path
-    real_score = main(args)
-    
-    fake_lm_paths =  f"/media/data2/binh/CSIRO/collected_data_sok_single/fake/"
-    args.landmark_path = fake_lm_paths
-    fake_score = main(args)
-    label_list = [0]*len(real_score)+[1]*len(fake_score)
-    # print(real_score, "\n", fake_score)
-    prob_list = np.concatenate([real_score,fake_score])
 
-    ACC, ACC_best, AUC = evaluate(label_list=label_list, prob_list=prob_list)
-
-    out_results = out_results.append({"Dataset":"inthewild", 
-                                    "Acc": np.round(ACC,2), 
-                                    "Acc_best": np.round(ACC_best,2), 
-                                    "AUC": np.round(AUC,2)}, ignore_index=True)
-  
-    out_results.to_csv(f"../../predictions/lrnet (in the wild).csv", index=False)
-    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Classify  videos',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter

@@ -102,7 +102,7 @@ if __name__ == "__main__":
     else:
         print("Runing upon setting")
         for data_name in (  "LightWeight", "real"): #"DeepFaceLab", "Dfaker", "Faceswap", "FOM_Animation", "FOM_Faceswap", "FSGAN", "LightWeight", "real"
-            args.input_path =   f"/media/data2/binh/CSIRO/generated_data_single/{data_name}/"
+            args.input_path =   f"../datasets/Stabilized/{data_name}/"
             args.output_path = f'./landmarks_new/{data_name}'
             args.visualize = False
             os.makedirs(args.output_path, exist_ok=True)
