@@ -1,2 +1,2 @@
-# DeepfakeSoK
-SoK: Facial Deepfake Detectors
+# SoK: Facial Deepfake Detectors
+
