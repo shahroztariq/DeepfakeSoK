@@ -162,7 +162,7 @@ if __name__ == "__main__":
     
     parser.add_argument('--workers', default=10, type=int,
                         help='Number of data loader workers.')
-    parser.add_argument('--model_path', default='/media/data1/binh/DeepfakeCampaign/pretrained_checkpoints/ccvit/cross_efficient_vit.pth', type=str, metavar='PATH',
+    parser.add_argument('--model_path', default='../pretrained-weight/ccvit/cross_efficient_vit.pth', type=str, metavar='PATH',
                         help='Path to model checkpoint (default: none).')
     parser.add_argument('--dataset', type=str, default='DFDC', 
                         help="Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTextures|DFDC)")

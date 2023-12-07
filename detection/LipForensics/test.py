@@ -64,7 +64,7 @@ def parse_args():
         "--weights_forgery_path",
         help="Path to pretrained weights for forgery detection",
         type=str,
-        default="/media/data1/binh/DeepfakeCampaign/pretrained_checkpoints/lipforensics/lipforensics_ff.pth"
+        default="../pretrained-weight/lipforensics/lipforensics_ff.pth"
     )
     parser.add_argument('--data-type', default='created',  type=str,choices=['created', 'collected'],
                          help='dataset to test')

@@ -53,7 +53,7 @@ def make_prediction(args):
     
     out_dir = "prediction"
     cfg_path = "i3d_ori.yaml"
-    ckpt_path = "/media/data1/binh/DeepfakeCampaign/pretrained_checkpoints/altfreezing/model.pth"
+    ckpt_path = "../pretrained-weight/altfreezing/model.pth"
     optimal_threshold = 0.04
     cfg.init_with_yaml()
     cfg.update_with_yaml(cfg_path)

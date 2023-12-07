@@ -49,7 +49,7 @@ def make_prediction(args):
     classifier = PluginLoader.get_classifier(cfg.classifier_type)()
     classifier.cuda()
     classifier.eval()
-    classifier.load("/media/data1/binh/DeepfakeCampaign/pretrained_checkpoints/ftcn/ftcn_tt.pth")
+    classifier.load("../pretrained-weight/ftcn/ftcn_tt.pth")
 
     crop_align_func = FasterCropAlignXRay(cfg.imsize)
 
