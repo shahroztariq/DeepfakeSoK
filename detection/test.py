@@ -29,6 +29,10 @@ from loops import evaluation, ict_evaluate
 import sys
 sys.path.append("./Capsule-Forensics-v2/")
 import model_big as CapSule
+from torch.utils.model_zoo import load_url
+from MCXAPI.models import API_Net
+from LGrad.CNNDetection.networks import resnet as LGrad
+from icpr2020dfdc.architectures import fornet, weights
 
 def parse_args():
     # Create the argument parser
@@ -189,6 +193,96 @@ def main(args):
         model.eval()
         use_bgr = False
 
+  
+    transform_3 = transforms.Compose([
+        transforms.Resize([512, 512]),
+        transforms.RandomCrop([448, 448]),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize(
+            mean=(0.485, 0.456, 0.406),
+            std=(0.229, 0.224, 0.225)
+    )])
+    
+    transform_9 = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Resize([512, 512]),
+        transforms.RandomCrop([448, 448]),
+        transforms.RandomHorizontalFlip(),
+        transforms.Normalize(
+            mean=(0.485, 0.456, 0.406, 0.485, 0.456, 0.406, 0.485, 0.456, 0.406),
+            std=(0.229, 0.224, 0.225, 0.229, 0.224, 0.225, 0.229, 0.224, 0.225)
+    )])
+
+    transform_lgrad = transforms.Compose([
+        transforms.Resize([256, 256]),
+        transforms.RandomCrop([256, 256]),
+        transforms.ToTensor(),
+    ])
+        
+    transform_eff = transforms.Compose([
+        transforms.Resize([512, 512]),
+        transforms.ToTensor(),
+    ])
+    
+    if 'mcx' in model_name:
+        if model_name == 'mcx-resnet101':
+            model = API_Net(num_classes=5, model_name='res101').cuda()
+        elif 'xception' in model_name :
+            if '9' in model_name :
+                model = API_Net(num_classes=5, model_name='xception_9channels')
+                transform = transform_9
+            else: 
+                model = API_Net(num_classes=5, model_name='xception')
+                transform = transform_3
+            
+        model = model.to(device='cuda')
+        if os.path.isfile(args.resume):
+            print('loading checkpoint {}'.format(args.resume))
+            checkpoint = torch.load(args.resume)
+            model.load_state_dict(checkpoint['state_dict'], strict=False) 
+            # solved by https://discuss.pytorch.org/t/solved-keyerror-unexpected-key-module-encoder-embedding-weight-in-state-dict/1686/31
+            print('loaded checkpoint {}(epoch {})'.format(args.resume, checkpoint['epoch']))
+        else:
+            print('no checkpoint found at {}'.format(args.resume))
+            
+
+        if 'res' in model_name:
+            fc_size = model.fc.in_features
+        elif 'eff' in model_name:
+            fc_size = model.classifier[1].in_features
+        elif 'vit' in model_name:
+            fc_size = model.hidden_dim
+        elif 'xception' in model_name:
+            fc_size = 2048
+        else:
+            sys.exit('wrong network name baby')
+        model.fc = nn.Linear(fc_size, 2)
+
+        model = model.to(device='cuda')
+            # model = models.resnet101(pretrained=True)
+        model.conv = nn.DataParallel(model.conv)
+    
+    elif 'lgrad' in model_name :
+        
+        model = LGrad.resnet50(num_classes=1)
+        model.load_state_dict(torch.load(args.resume, map_location='cpu')) # args.resume = 'LGrad-1class-Trainon-Progan_horse.pth'
+        model.cuda()
+        fc_size = model.fc_size
+        model.fc = nn.Linear(fc_size, 2)
+        model = model.to(device='cuda')
+        transform = transform_lgrad
+    elif 'effb4att' in model_name:
+        net_model = 'EfficientNetAutoAttB4'
+        model_path = weights.weight_url['{:s}_{:s}'.format(net_model, 'FFPP')]
+        model = getattr(fornet, net_model)()
+        model.load_state_dict(load_url(model_path, map_location='cuda', check_hash=True))
+        
+        fc_size = model.classifier.in_features
+        model.classifier = nn.Linear(fc_size, 2)
+        model = model.to('cuda')
+        transform = transform_eff
+    
 
     valid_dataloader = DataLoader(FaceDataset(args.test_folder, transform=transformer, use_bgr=use_bgr, sampling_rate=args.sampling_rate),
                             batch_size=args.batch_size, shuffle=False)
@@ -229,6 +323,10 @@ def test_folders(args):
     for data_name in ("DeepFaceLab", "Dfaker", "Faceswap", "FOM_Animation", "FOM_Faceswap", "FSGAN", "LightWeight"):
         args.test_folder = ["/datasets/Stabilized/real/",
                     f"datasets/Stabilized/{data_name}/"]
+        if "lgrad" in args.model_name:
+            lgrad_path = "/datasets/LGrad/Stabilized/" # To test Lgrad on Stabilized dataset, pre-processing our dataset and saving in this directory is needed.
+            args.test_folder = [lgrad_path +f"real/", 
+                                    lgrad_path +f"{data_name}/"]
         print(args.test_folder)
         if not args.penul_ft:
             ACC, ACC_best, AUC  = main(args)
@@ -292,6 +390,10 @@ def dfdcp_test_folders(args):
 
     args.test_folder = ["/datsets/dfdc/real/",
                 f"dataset/dfdc/fake/"]
+    if 'lgrad' in args.model_name:
+        lgrad_path = "/datasets/LGrad/dfdcp/" 
+        args.test_folder = [f"{lgrad_path}real/",
+                            f"{lgrad_path}fake/"]
     print(args.test_folder)
     ACC, ACC_best, AUC = main(args)
     out_results = out_results.append({"Dataset":"dfdcp", 
@@ -316,6 +418,10 @@ def cdf_test_folders(args):
 
     args.test_folder = ["datasets/CelebDF-v2/real/",
                 f"datasets/CelebDF-v2/fake/"]
+    if 'lgrad' in args.model_name:
+        lgrad_path = "/datasets/LGrad/CelebDF-v2/" 
+        args.test_folder = [f"{lgrad_path}real/",
+                            f"{lgrad_path}fake/"]
     
     print(args.test_folder)
     ACC, ACC_best, AUC = main(args)
