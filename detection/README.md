@@ -9,3 +9,5 @@ CUDA_VISIBLE_DEVICES="0" python test.py  --model-name <method> --batch-size 128
 Where the ` <method> ` is selected from (`selfblended`, `mat`, `ict`, `rossler`, `forgerynet`, `capsule`, `caddm`, `ccvit`, `add`, `mcx`, `lgrad`, `effb4att`)
 
 For the methods:  FTCN, AltFreexing, LipForensics, LRNet, CLRNet, please refer to their folder and run the `test.py` or `test.ipynb`.
+
+For Lgrad method: Please learn how to pre-process facial deepfake image datasets to gradient datasets and download pretrained GAN networks from their official repository before run the `test.py`. 
