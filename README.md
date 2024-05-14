@@ -17,10 +17,10 @@ For the methods:  FTCN, AltFreexing, LipForensics, LRNet, CLRNet, please refer t
 
 For Lgrad method: Please learn how to pre-process facial deepfake image datasets to gradient datasets and download pretrained GAN networks from their official repository before run the `test.py`.
 
-### II. Dataset
-#### 1. White-box dataset
+### II. Datasets
+#### 1. White-box datasets
 Please email to obtain the white-box dataset generated from popular deepfake apps and repos.
-#### 2. Gray-box dataset
+#### 2. Gray-box datasets
 * CelebDFv2 [[Dataset]](https://cse.buffalo.edu/~siweilyu/celeb-deepfakeforensics.html)  [[Paper]](https://arxiv.org/abs/1909.12962) 
 * DFDC [[Dataset]](https://www.kaggle.com/c/deepfake-detection-challenge)  [[Paper]](https://arxiv.org/abs/2006.07397) 
 #### 2. Black-box dataset
