@@ -114,7 +114,7 @@ Please email us to obtain the white-box dataset generated from popular deepfake 
 
 ### Acknowledgements
 
-Our source code is modified and adapted on these great repositories and paper:
+Our source code is modified and adapted on these great repositories and papers:
 
 -  Rossler *et al.*: FaceForensics++: Learning to Detect Manipulated Facial Images
 -  CapsuleForensics: Capsule-Forensics: Using Capsule Networks to Detect Forged Images and Videos
