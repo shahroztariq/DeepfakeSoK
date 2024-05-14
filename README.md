@@ -116,20 +116,20 @@ Please email us to obtain the white-box dataset generated from popular deepfake 
 
 Our source code is modified and adapted on these great repositories and papers:
 
--  Rossler *et al.*: FaceForensics++: Learning to Detect Manipulated Facial Images
--  CapsuleForensics: Capsule-Forensics: Using Capsule Networks to Detect Forged Images and Videos
--  EfficientNetB4Att: Video Face Manipulation Detection Through Ensemble of CNNs
--  LipForensics: Lips Don’t Lie: A Generalisable and Robust Approach to Face Forgery Detection
--  CCViT: Combining EfficientNet and Vision Transformers for Video Deepfake Detection
--  FTCN: Exploring Temporal Coherence for More General Video Face Forgery Detection
--  LRNet: Improving the Efficiency and Robustness of Deepfakes Detection through Precise Geometric Features
--  MAT: Multi-attentional Deepfake Detection
--  CLRNet: One Detector to Rule Them All
--  SBIs: Detecting Deepfakes with Self-Blended Images
--  ICT: Protecting Celebrities from DeepFake with Identity Consistency Transformer
--  CADDM: Implicit Identity Leakage: The Stumbling Block to Improving Deepfake Detection Generalization
--  MCX-API: Learning Pairwise Interaction for Generalizable DeepFake Detection
--  LGrad: Learning on Gradients: Generalized Artifacts Representation for GAN-Generated Images Detection
--  AltFreezing: AltFreezing for More General Face Forgery Detection
--  ADD: ADD: Frequency Attention and Multi-View Based Knowledge Distillation to Detect Low-Quality Compressed Deepfake Images
+-  Rossler *et al.*: `FaceForensics++: Learning to Detect Manipulated Facial Images`
+-  CapsuleForensics: `Capsule-Forensics: Using Capsule Networks to Detect Forged Images and Videos`
+-  EfficientNetB4Att: `Video Face Manipulation Detection Through Ensemble of CNNs`
+-  LipForensics: `Lips Don’t Lie: A Generalisable and Robust Approach to Face Forgery Detection`
+-  CCViT: `Combining EfficientNet and Vision Transformers for Video Deepfake Detection`
+-  FTCN: `Exploring Temporal Coherence for More General Video Face Forgery Detection`
+-  LRNet: `Improving the Efficiency and Robustness of Deepfakes Detection through Precise Geometric Features`
+-  MAT: `Multi-attentional Deepfake Detection`
+-  CLRNet: `One Detector to Rule Them All`
+-  SBIs: `Detecting Deepfakes with Self-Blended Images`
+-  ICT: `Protecting Celebrities from DeepFake with Identity Consistency Transformer`
+-  CADDM: `Implicit Identity Leakage: The Stumbling Block to Improving Deepfake Detection Generalization`
+-  MCX-API: `Learning Pairwise Interaction for Generalizable DeepFake Detection`
+-  LGrad: `Learning on Gradients: Generalized Artifacts Representation for GAN-Generated Images Detection`
+-  AltFreezing: `AltFreezing for More General Face Forgery Detection`
+-  ADD: `ADD: Frequency Attention and Multi-View Based Knowledge Distillation to Detect Low-Quality Compressed Deepfake Images`
   
