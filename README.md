@@ -111,3 +111,25 @@ Please email us to obtain the white-box dataset generated from popular deepfake 
 | LightWeight          | 87.65                                      | 95.06                                          | 98.99             | 92.86             | 92.86              | 92.86             | 100.00            | 100.00            | 100.00            | 100.00            | 100.00             | 100.00            |
 |    **Avg.**         | 83.59  (4.14)                             | 89.59  (6.08)                                 | 92.65  (8.18)    | 83.57  (10.71)   | 87.30  (6.69)     | 80.61  (14.56)   | 86.42  (16.36)   | 88.01  (14.83)   | 80.95  (25.58)   | 72.21  (36.07)   | 96.52  (6.48)     | 66.84  (41.43)   |
 |    **In-the-wild** | 62.87                                      | 72.94                                          | 66.10             | 84.35             | 72.94              | 100.00            | 33.49             | 73.73             | 49.76             | 84.42             | 74.41              | 97.54             |
+
+### Acknowledgements
+
+Our source code is modified and adapted on these great repositories and paper:
+
+-  Rossler *et al.*: FaceForensics++: Learning to Detect Manipulated Facial Images
+-  CapsuleForensics: Capsule-Forensics: Using Capsule Networks to Detect Forged Images and Videos
+-  EfficientNetB4Att: Video Face Manipulation Detection Through Ensemble of CNNs
+-  LipForensics: Lips Don’t Lie: A Generalisable and Robust Approach to Face Forgery Detection
+-  CCViT: Combining EfficientNet and Vision Transformers for Video Deepfake Detection
+-  FTCN: Exploring Temporal Coherence for More General Video Face Forgery Detection
+-  LRNet: Improving the Efficiency and Robustness of Deepfakes Detection through Precise Geometric Features
+-  MAT: Multi-attentional Deepfake Detection
+-  CLRNet: One Detector to Rule Them All
+-  SBIs: Detecting Deepfakes with Self-Blended Images
+-  ICT: Protecting Celebrities from DeepFake with Identity Consistency Transformer
+-  CADDM: Implicit Identity Leakage: The Stumbling Block to Improving Deepfake Detection Generalization
+-  MCX-API: Learning Pairwise Interaction for Generalizable DeepFake Detection
+-  LGrad: Learning on Gradients: Generalized Artifacts Representation for GAN-Generated Images Detection
+-  AltFreezing: AltFreezing for More General Face Forgery Detection
+-  ADD: ADD: Frequency Attention and Multi-View Based Knowledge Distillation to Detect Low-Quality Compressed Deepfake Images
+  
