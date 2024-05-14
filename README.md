@@ -1,6 +1,7 @@
 # Facial Deepfake Detectors
-Under Review.
+*Under Review.*
 
+![IMG](asset/ConceptualFramework.png) 
 ### I. Validate 16 Deepfake Detectors
 
 For starting evaluation, please put the dataset in the `datasets` folder, and download the pre-trained weight from 16 respositories / papers and put into the `pretrained-weight` forlder.
