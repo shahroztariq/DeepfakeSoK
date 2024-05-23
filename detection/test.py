@@ -193,75 +193,27 @@ def main(args):
         model.eval()
         use_bgr = False
 
-  
-    transform_3 = transforms.Compose([
-        transforms.Resize([512, 512]),
-        transforms.RandomCrop([448, 448]),
-        transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
-        transforms.Normalize(
-            mean=(0.485, 0.456, 0.406),
-            std=(0.229, 0.224, 0.225)
-    )])
-    
-    transform_9 = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Resize([512, 512]),
-        transforms.RandomCrop([448, 448]),
-        transforms.RandomHorizontalFlip(),
-        transforms.Normalize(
-            mean=(0.485, 0.456, 0.406, 0.485, 0.456, 0.406, 0.485, 0.456, 0.406),
-            std=(0.229, 0.224, 0.225, 0.229, 0.224, 0.225, 0.229, 0.224, 0.225)
-    )])
-
-    transform_lgrad = transforms.Compose([
-        transforms.Resize([256, 256]),
-        transforms.RandomCrop([256, 256]),
-        transforms.ToTensor(),
-    ])
-        
-    transform_eff = transforms.Compose([
-        transforms.Resize([512, 512]),
-        transforms.ToTensor(),
-    ])
-    
-    if 'mcx' in model_name:
-        if model_name == 'mcx-resnet101':
-            model = API_Net(num_classes=5, model_name='res101').cuda()
-        elif 'xception' in model_name :
-            if '9' in model_name :
-                model = API_Net(num_classes=5, model_name='xception_9channels')
-                transform = transform_9
-            else: 
-                model = API_Net(num_classes=5, model_name='xception')
-                transform = transform_3
-            
-        model = model.to(device='cuda')
-        if os.path.isfile(args.resume):
-            print('loading checkpoint {}'.format(args.resume))
-            checkpoint = torch.load(args.resume)
-            model.load_state_dict(checkpoint['state_dict'], strict=False) 
-            # solved by https://discuss.pytorch.org/t/solved-keyerror-unexpected-key-module-encoder-embedding-weight-in-state-dict/1686/31
-            print('loaded checkpoint {}(epoch {})'.format(args.resume, checkpoint['epoch']))
-        else:
-            print('no checkpoint found at {}'.format(args.resume))
-            
-
-        if 'res' in model_name:
-            fc_size = model.fc.in_features
-        elif 'eff' in model_name:
-            fc_size = model.classifier[1].in_features
-        elif 'vit' in model_name:
-            fc_size = model.hidden_dim
-        elif 'xception' in model_name:
-            fc_size = 2048
-        else:
-            sys.exit('wrong network name baby')
-        model.fc = nn.Linear(fc_size, 2)
-
-        model = model.to(device='cuda')
-            # model = models.resnet101(pretrained=True)
+ 
+    elif args.model_name == 'mcx':
+        from model_zoo.mcx import API_Net
+        model = API_Net(num_classes=5, model_name='xception').cuda()
         model.conv = nn.DataParallel(model.conv)
+        pretrained_model = 'pretrained-weight/mcx/model_mcx-api-rgb.tar'
+        checkpoint = torch.load(pretrained_model)
+        model.load_state_dict(checkpoint['state_dict'], strict=True)
+        img_size = 448
+        transformer = transforms.Compose([
+                    transforms.Resize([512, 512]),
+                    transforms.RandomCrop([img_size, img_size]),
+                    # transforms.RandomHorizontalFlip(), not common to use random in test
+                    transforms.ToTensor(),
+                    transforms.Normalize(
+                        mean=(0.485, 0.456, 0.406),
+                        std=(0.229, 0.224, 0.225)
+                    )])
+        fake_class = 0 # use the real class in inverse in the loop
+        model.eval()
+        use_bgr = False
     
     elif 'lgrad' in model_name :
         
@@ -271,7 +223,13 @@ def main(args):
         fc_size = model.fc_size
         model.fc = nn.Linear(fc_size, 2)
         model = model.to(device='cuda')
-        transform = transform_lgrad
+        transform = transforms.Compose([
+        transforms.Resize([256, 256]),
+        transforms.RandomCrop([256, 256]),
+        transforms.ToTensor(),
+    ])
+        
+
     elif args.model_name == 'effb4att':
         net_model = 'EfficientNetAutoAttB4ST'
         model_path = weights.weight_url['{:s}_{:s}'.format(net_model, 'FFPP')]
