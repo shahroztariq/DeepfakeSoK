@@ -273,6 +273,7 @@ def evaluation(model, dataloader, fake_class, method, softmax=True, penul_ft=Fal
 
             if softmax:
                 prob = F.softmax(cls_out, dim=1).cpu().data.numpy()[:, fake_class] # Get fake prob
+                if method == 'mcx': prob = 1.0 - prob
             else:
                 prob = torch.sigmoid(cls_out).cpu().data.numpy()
 
