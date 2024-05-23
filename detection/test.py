@@ -220,9 +220,10 @@ def main(args):
         model = LGrad.resnet50(num_classes=1)
         model.load_state_dict(torch.load(args.resume, map_location='cpu'), strict=True) # args.resume = 'LGrad-1class-Trainon-Progan_horse.pth'
         model.cuda()
+        img_size = 224
         transform = transforms.Compose([
                     transforms.Resize([256, 256]),
-                    transforms.CenterCrop([224, 224]),
+                    transforms.CenterCrop([img_size, img_size]),
                     transforms.ToTensor(),
                     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
                 ])
