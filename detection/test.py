@@ -218,17 +218,14 @@ def main(args):
     elif 'lgrad' in model_name :
         
         model = LGrad.resnet50(num_classes=1)
-        model.load_state_dict(torch.load(args.resume, map_location='cpu')) # args.resume = 'LGrad-1class-Trainon-Progan_horse.pth'
+        model.load_state_dict(torch.load(args.resume, map_location='cpu'), strict=True) # args.resume = 'LGrad-1class-Trainon-Progan_horse.pth'
         model.cuda()
-        fc_size = model.fc_size
-        model.fc = nn.Linear(fc_size, 2)
-        model = model.to(device='cuda')
         transform = transforms.Compose([
-        transforms.Resize([256, 256]),
-        transforms.RandomCrop([256, 256]),
-        transforms.ToTensor(),
-    ])
-        
+                    transforms.Resize([256, 256]),
+                    transforms.RandomCrop([256, 256]),
+                    transforms.ToTensor(),
+                ])
+                    
 
     elif args.model_name == 'effb4att':
         net_model = 'EfficientNetAutoAttB4ST'
