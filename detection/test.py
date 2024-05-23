@@ -272,17 +272,22 @@ def main(args):
         model.fc = nn.Linear(fc_size, 2)
         model = model.to(device='cuda')
         transform = transform_lgrad
-    elif 'effb4att' in model_name:
-        net_model = 'EfficientNetAutoAttB4'
+    elif args.model_name == 'effb4att':
+        net_model = 'EfficientNetAutoAttB4ST'
         model_path = weights.weight_url['{:s}_{:s}'.format(net_model, 'FFPP')]
-        model = getattr(fornet, net_model)()
-        model.load_state_dict(load_url(model_path, map_location='cuda', check_hash=True))
-        
-        fc_size = model.classifier.in_features
-        model.classifier = nn.Linear(fc_size, 2)
-        model = model.to('cuda')
-        transform = transform_eff
-    
+        checkpoint = load_url(model_path, map_location='cuda', check_hash=True)
+        model = getattr(fornet, net_model)().cuda()
+        model.load_state_dict(checkpoint['net'], strict=True)
+        img_size = 224
+        transformer =transformer =  transforms.Compose([
+                        transforms.Resize((img_size, img_size)),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+                        ])
+        fake_class = 1
+        softmax = False
+        model.eval()
+        use_bgr = False
 
     valid_dataloader = DataLoader(FaceDataset(args.test_folder, transform=transformer, use_bgr=use_bgr, sampling_rate=args.sampling_rate),
                             batch_size=args.batch_size, shuffle=False)
