@@ -1,11 +1,11 @@
 # SoK: Systematization and Benchmarking of Deepfake Detectors in a Unified Framework
 *Under Review.*
-
+### I. Overview
 ![IMG](asset/ConceptualFramework.png) 
 
-*We conduct a comprehensive review and analysis of 51 state-of-the-art deepfake detectors, categorized into a unified framework of four high-level and thirteen fine-grained groups. It includes evaluations of 16 leading detectors across diverse attack scenarios, offering insights into the factors influencing detector efficacy and generalizability.*
+*We conduct a comprehensive review and analysis of 51 state-of-the-art deepfake detectors, categorized into a unified framework of four high-level and thirteen fine-grained groups. As a part of our study, this repository includes evaluations of 16 leading detectors across diverse attack scenarios, offering insights into the factors influencing detector efficacy and generalizability.*
 
-### I. Validate 16 Deepfake Detectors
+### II. Validate 16 Deepfake Detectors
 
 For starting evaluation, please put the dataset in the `datasets` folder, and download the pre-trained weight from 16 respositories / papers and put into the `pretrained-weight` forlder.
 
@@ -21,7 +21,7 @@ For the methods:  FTCN, AltFreexing, LipForensics, LRNet, CLRNet, please refer t
 
 For Lgrad method: Please learn how to pre-process facial deepfake image datasets to gradient datasets and download pretrained GAN networks from their official repository before run the `test.py`.
 
-### II. Datasets
+### III. Datasets
 #### 1. White-box datasets
 Please email us to obtain the white-box dataset generated from popular deepfake apps and repos.
 #### 2. Gray-box datasets
@@ -30,7 +30,7 @@ Please email us to obtain the white-box dataset generated from popular deepfake 
 #### 2. Black-box dataset
 * RWDF-23 [[Dataset]](https://sites.google.com/view/rwdf-23/) [[Paper]](https://dl.acm.org/doi/10.1145/3583780.3614729) 
 
-### III. Evaluation Results (White- \& black-box)
+### IV. Evaluation Results (White- \& black-box)
 
 |                      | ACC                                        |   ACC@best                                     |   AUC             |   F1              |   Precision        |   Recall          |   ACC             |   ACC@best        |   AUC             |   F1              |   Precision        |   Recall          |
 |----------------------|--------------------------------------------|------------------------------------------------|-------------------|-------------------|--------------------|-------------------|-------------------|-------------------|-------------------|-------------------|--------------------|-------------------|
@@ -115,7 +115,7 @@ Please email us to obtain the white-box dataset generated from popular deepfake 
 |    **Avg.**          | 83.59  (4.14)                              | 89.59  (6.08)                                  | 92.65  (8.18)     | 83.57  (10.71)    | 87.30  (6.69)      | 80.61  (14.56)    | 86.42  (16.36)    | 88.01  (14.83)    | 80.95  (25.58)    | 72.21  (36.07)    | 96.52  (6.48)      | 66.84  (41.43)    |
 |    **In-the-wild**   | 62.87                                      | 72.94                                          | 66.10             | 84.35             | 72.94              | 100.00            | 33.49             | 73.73             | 49.76             | 84.42             | 74.41              | 97.54             |
 
-### Acknowledgements
+### V. Acknowledgements
 
 Our source code is modified and adapted on these great repositories and papers:
 
