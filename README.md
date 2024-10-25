@@ -2,6 +2,9 @@
 *Under Review.*
 
 ![IMG](asset/ConceptualFramework.png) 
+
+*We conduct a comprehensive review and analysis of 51 state-of-the-art deepfake detectors, categorized into a unified framework of four high-level and thirteen fine-grained groups. It includes evaluations of 16 leading detectors across diverse attack scenarios, offering insights into the factors influencing detector efficacy and generalizability.*
+
 ### I. Validate 16 Deepfake Detectors
 
 For starting evaluation, please put the dataset in the `datasets` folder, and download the pre-trained weight from 16 respositories / papers and put into the `pretrained-weight` forlder.
