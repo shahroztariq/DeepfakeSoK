@@ -23,11 +23,11 @@ For Lgrad method: Please learn how to pre-process facial deepfake image datasets
 
 ### III. Datasets
 #### 1. White-box datasets
-Please email us to obtain the white-box dataset generated from popular deepfake apps and repos.
+Too obtain the white-box dataset generated from popular deepfake apps and repos, please follow this [license agreement](https://docs.google.com/forms/d/e/1FAIpQLSee4-16vNiVsjzhM-MyJGOkVokkSBAzyb-MyLKn2qFhNse2dw)
 #### 2. Gray-box datasets
 * CelebDFv2 [[Dataset]](https://cse.buffalo.edu/~siweilyu/celeb-deepfakeforensics.html)  [[Paper]](https://arxiv.org/abs/1909.12962) 
 * DFDC [[Dataset]](https://www.kaggle.com/c/deepfake-detection-challenge)  [[Paper]](https://arxiv.org/abs/2006.07397) 
-#### 2. Black-box dataset
+#### 3. Black-box dataset
 * RWDF-23 [[Dataset]](https://sites.google.com/view/rwdf-23/) [[Paper]](https://dl.acm.org/doi/10.1145/3583780.3614729) 
 
 ### IV. Evaluation Results (White- \& black-box)
