@@ -17,7 +17,9 @@ CUDA_VISIBLE_DEVICES="0" python ./detection/test.py  --model-name <method> --bat
 
 Where the ` <method> ` is selected from (`selfblended`, `mat`, `ict`, `rossler`, `forgerynet`, `capsule`, `caddm`, `ccvit`, `add`, `mcx`, `lgrad`, `effb4att`)
 
-For the methods:  FTCN, AltFreexing, LipForensics, LRNet, CLRNet, please refer to their respective folder and run the `test.py` or `test.ipynb`.
+For the methods:  FTCN, AltFreexing, LipForensics, CLRNet, please refer to their respective folder and run the `test.py` or `test.ipynb`. 
+
+For LRNet method: We do similarly with original [respository](https://github.com/frederickszk/LRNet): extracting landmark and run `classify.py` in the `demo` folder
 
 For Lgrad method: Please learn how to pre-process facial deepfake image datasets to gradient datasets and download pretrained GAN networks from their official repository before run the `test.py`.
 
